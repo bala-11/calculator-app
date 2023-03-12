@@ -1,6 +1,6 @@
 let runningTotal = 0;
 let buffer = "0";
-let previousOperator ;
+let previousOperator;
 
 
 const screen = document.querySelector('.screen');
@@ -23,10 +23,10 @@ function handleSymbol(symbol){
             break;
 
         case '=' :
-            if(previousOperator===null){
+            if(previousOperator === null){
                 return
             }
-            flushOpertion(parseInt(buffer));
+            flushOperation(parseInt(buffer));
             previousOperator = null;
             buffer = runningTotal;
             break;
@@ -36,7 +36,7 @@ function handleSymbol(symbol){
                 buffer = '0';
             }
             else{
-                buffer = buffer.toString( 0,buffer.length - 1 );
+                buffer = buffer.substring( 0, buffer.length - 1 );
             }
             break;
 
@@ -62,20 +62,19 @@ function handleMath(symbol){
     if(runningTotal === 0 ){
         runningTotal = intBuffer;
     }else{
-        flushOperator = symbol;
+        flushOperation(intBuffer);
     }
-
     previousOperator = symbol;
     buffer = '0';
 }
 
-function flushOperator(intBuffer){
+function flushOperation(intBuffer){
     if(previousOperator === '+'){
         runningTotal += intBuffer;
     }else if(previousOperator === '−'){
         runningTotal -= intBuffer;
     }else if(previousOperator === '×'){
-        runningTotal *=intBuffer;
+        runningTotal *= intBuffer;
     }else if(previousOperator === '÷'){
         runningTotal /= intBuffer;
     }
